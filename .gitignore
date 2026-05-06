@@ -1,0 +1,22 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# credentials
+*.json
+gcp_keyfile.json
+service_account*.json
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
+
+# Airflow
+airflow/logs/
+
+# OS
+.DS_Store
+Thumbs.db
