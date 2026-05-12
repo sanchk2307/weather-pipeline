@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: int_weather_daily
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - city
+            - date

@@ -1,0 +1,11 @@
+#TODO: Add descriptions
+version: 2
+models:
+  - name: stg_weather
+    columns:
+      - name: city
+        tests:
+          - not_null
+      - name: date
+        tests:
+          - not_null

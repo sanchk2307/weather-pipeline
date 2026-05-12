@@ -1,0 +1,11 @@
+version: 2
+sources:
+  - name: weather_raw
+    database: weather-pipeline-495522
+    schema: weather_raw
+    tables:
+      - name: daily_weather
+        loaded_at_field: ingested_at
+        freshness:
+          warn_after: {count: 25, period: hour}
+          error_after: {count: 48, period: hour}
