@@ -13,9 +13,11 @@ service_account*.json
 dbt/target/
 dbt/logs/
 dbt/.user.yml
+dbt/profiles.yml
 
 # Airflow
 airflow/logs/
+airflow/config/airflow.cfg
 
 # OS
 .DS_Store
