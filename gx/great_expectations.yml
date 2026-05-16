@@ -87,11 +87,11 @@ fluent_datasources:
     assets:
       daily_weather_asset:
         type: table
-        id: a523969c-ec72-4afe-aa5c-78ff09728995
+        id: 02ebda70-b34c-4bcc-a3ca-69f99db748b6
         batch_metadata: {}
         batch_definitions:
           full_load:
-            id: f23a82fe-4679-4451-a302-5e465d348976
+            id: 3304409c-e5ad-43ba-922a-1632b1117634
             partitioner:
         table_name: daily_weather
     connection_string: bigquery://weather-pipeline-495522/weather_raw

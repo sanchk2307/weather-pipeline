@@ -6,3 +6,34 @@ models:
           combination_of_columns:
             - city
             - date
+    columns:
+      - name: city
+        description: "City name"
+        tests:
+          - not_null
+      - name: date
+        description: "Observation date"
+        tests:
+          - not_null
+      - name: temp_max_c
+        description: "Max temperature (C)"
+      - name: temp_min_c
+        description: "Min temperature (C)"
+      - name: temp_mean_c
+        description: "Mean temperature (C)"
+      - name: precipitation_mm
+        description: "Total precipitation (mm)"
+      - name: windspeed_max_kmh
+        description: "Max wind speed (km/h)"
+      - name: humidity_pct
+        description: "Mean relative humidity (%)"
+      - name: weather_code
+        description: "WMO weather code"
+      - name: temp_range_c
+        description: "Temperature range (c)"
+      - name: is_rainy
+        description: "Flag for rain"
+      - name: heat_index_c
+        description: "Feels like temperature (C)"
+      - name: ingested_at
+        description: "Load timestamp"

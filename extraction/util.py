@@ -2,6 +2,21 @@ from datetime import timedelta
 
 
 def get_date_ranges(start_date, end_date, existing_dates):
+    """
+    Compute the date ranges that need to be fetched, excluding already-loaded dates.
+
+    Splits the start_date to end_date window into contiguous ranges that
+    exclude any dates present in existing_dates, enabling idempotent backfills.
+
+    Args:
+        start_date: datetime.date representing the start of the desired range.
+        end_date: datetime.date representing the end of the desired range.
+        existing_dates: List of datetime.date objects already present in BigQuery.
+
+    Returns:
+        List of (start, end) tuples of datetime.date, each representing a
+        contiguous range of missing dates to fetch.
+    """
     date_ranges = []
     existing_dates = sorted(d for d in existing_dates if start_date <= d <= end_date)
     left = start_date - timedelta(days=1)

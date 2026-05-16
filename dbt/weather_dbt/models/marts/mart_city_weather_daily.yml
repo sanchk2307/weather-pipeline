@@ -1,0 +1,49 @@
+#TODO: Add descriptions
+version: 2
+models:
+  - name: stg_weather
+    columns:
+      - name: city
+        description: "City name"
+        tests:
+          - not_null
+      - name: date
+        description: "Observation date"
+        tests:
+          - not_null
+      - name: temp_max_c
+        description: "Max temperature (C)"
+      - name: temp_min_c
+        description: "Min temperature (C)"
+      - name: temp_mean_c
+        description: "Mean temperature (C)"
+      - name: temp_range_c
+        description: "Temperature range (c)"
+      - name: precipitation_mm
+        description: "Total precipitation (mm)"
+      - name: windspeed_max_kmh
+        description: "Max wind speed (km/h)"
+      - name: humidity_pct
+        description: "Mean relative humidity (%)"
+      - name: weather_code
+        description: "WMO weather code"
+      - name: is_rainy
+        description: "Flag for rain"
+      - name: seven_day_rolling_avg_temp_max_c
+        description: "7 day rolling average max temperature (C)"
+      - name: seven_day_rolling_avg_temp_min_c
+        description: "7 day rolling average min temperature (C)"
+      - name: seven_day_rolling_avg_temp_mean_c
+        description: "7 day rolling average mean temperature (C)"
+      - name: seven_day_rolling_avg_temp_range_c
+        description: "7 day rolling average range temperature (C)"
+      - name: seven_day_rolling_avg_precipitation_mm
+        description: "7 day rolling average precipitation (mm)"
+      - name: seven_day_rolling_avg_windspeed_max_kmh
+        description: "7 day rolling average max wind speed (km/h)"
+      - name: seven_day_rolling_avg_humidity_pct
+        description: "7 day rolling average humidity (%)"
+      - name: seven_day_rolling_avg_heat_index_c
+        description: "7 day rolling average heat index (C)"
+      - name: ingested_at
+        description: "Load timestamp"

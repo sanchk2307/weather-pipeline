@@ -19,10 +19,31 @@ RAW_WEATHER_SCHEMA = [
 
 
 def get_bigquery_client():
+    """
+    Create and return an authenticated BigQuery client.
+
+    Credentials are picked up automatically from the
+    GOOGLE_APPLICATION_CREDENTIALS environment variable.
+
+    Returns:
+        google.cloud.bigquery.Client instance.
+    """
     return bigquery.Client()
 
 
 def rows_to_dataframe(rows):
+    """
+    Convert a list of row dicts into a pandas DataFrame with correct column types.
+
+    Casts date to datetime.date and ingested_at to datetime for BigQuery
+    compatibility.
+
+    Args:
+        rows: List of dicts as returned by parse_response().
+
+    Returns:
+        pandas DataFrame with correctly typed columns.
+    """
     df = pd.DataFrame(rows)
     df["date"] = pd.to_datetime(df["date"]).dt.date
     df["ingested_at"] = pd.to_datetime(df["ingested_at"])
@@ -30,6 +51,17 @@ def rows_to_dataframe(rows):
 
 
 def load_to_bigquery(df, table_id, client):
+    """
+    Append a DataFrame to a BigQuery table using an explicit schema.
+
+    Args:
+        df: pandas DataFrame to load.
+        table_id: Fully qualified BigQuery table ID (project.dataset.table).
+        client: Authenticated BigQuery client.
+
+    Returns:
+        Completed BigQuery LoadJob.
+    """
     config = bigquery.LoadJobConfig(
         schema=RAW_WEATHER_SCHEMA, write_disposition="WRITE_APPEND"
     )
@@ -39,6 +71,20 @@ def load_to_bigquery(df, table_id, client):
 
 
 def get_existing_dates(city, table_id, client):
+    """
+    Query BigQuery for dates already loaded for a given city.
+
+    Used to skip re-fetching dates that are already present, making
+    the pipeline idempotent.
+
+    Args:
+        city: City name string to filter by.
+        table_id: Fully qualified BigQuery table ID (project.dataset.table).
+        client: Authenticated BigQuery client.
+
+    Returns:
+        List of datetime.date objects representing already-loaded dates.
+    """
     query = f"SELECT DISTINCT date FROM `{table_id}` WHERE city = '{city}'"
     query_job = client.query(query)
     results = query_job.result()

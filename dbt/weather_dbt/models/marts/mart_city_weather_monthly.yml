@@ -1,0 +1,37 @@
+#TODO: Add descriptions
+version: 2
+models:
+  - name: stg_weather
+    columns:
+      - name: city
+        description: "City name"
+        tests:
+          - not_null
+      - name: month
+        description: "Observation month"
+        tests:
+          - not_null
+      - name: month_number
+        description: "Observation month number"
+      - name: year
+        description: "Observation year"
+      - name: monthly_avg_temp_max_c
+        description: "Monthly average max temperature (C)"
+      - name: monthly_avg_temp_min_c
+        description: "Monthly average min temperature (C)"
+      - name: monthly_avg_temp_mean_c
+        description: "Monthly average mean temperature (C)"
+      - name: monthly_avg_temp_range_c
+        description: "Monthly average range temperature (C)"
+      - name: monthly_total_rainfall_mm
+        description: "Monthly average precipitation (mm)"
+      - name: monthly_max_windspeed_kmh
+        description: "Monthly average wind speed (km/h)"
+      - name: monthly_avg_humidity_pct
+        description: "Monthly average humidity (%)"
+      - name: rainy_days_count
+        description: "Monthly count of rainy days"
+      - name: monthly_avg_heat_index_c
+        description: "Monthly average heat index (C)"
+      - name: city_rank_temp
+        description: "Rank for city based on monthly average mean temperature"
