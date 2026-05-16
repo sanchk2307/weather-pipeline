@@ -15,20 +15,25 @@ table_asset = datasource.add_table_asset(
 
 batch_definition = table_asset.add_batch_definition_whole_table(name="full_load")
 
-try:
-    context.suites.delete("raw_weather_suite")
-except Exception:
-    pass
-try:
-    context.checkpoints.delete("weather_raw_checkpoint")
-except Exception:
-    pass
-try:
-    context.validation_definitions.delete("weather_raw_validation")
-except Exception:
-    pass
+for suite_name in ["raw_weather_suite"]:
+    try:
+        context.suites.delete(suite_name)
+    except Exception:
+        pass
 
-suite = context.suites.add(gx.ExpectationSuite(name="raw_weather_suite"))
+for vd_name in ["weather_raw_validation"]:
+    try:
+        context.validation_definitions.delete(vd_name)
+    except Exception:
+        pass
+
+for cp_name in ["weather_raw_checkpoint"]:
+    try:
+        context.checkpoints.delete(cp_name)
+    except Exception:
+        pass
+
+suite = context.suites.add_or_update(gx.ExpectationSuite(name="raw_weather_suite"))
 
 # expect columns to exist
 for col in [
@@ -73,13 +78,13 @@ suite.add_expectation(
     )
 )
 
-validation_definition = context.validation_definitions.add(
+validation_definition = context.validation_definitions.add_or_update(
     gx.ValidationDefinition(
         name="weather_raw_validation", data=batch_definition, suite=suite
     )
 )
 
-checkpoint = context.checkpoints.add(
+checkpoint = context.checkpoints.add_or_update(
     gx.Checkpoint(
         name="weather_raw_checkpoint",
         validation_definitions=[validation_definition],
@@ -88,6 +93,7 @@ checkpoint = context.checkpoints.add(
 )
 
 results = checkpoint.run()
+context.open_data_docs()
 
 print(f"\nValidation passed: {results.success}")
 for vr in results.run_results.values():

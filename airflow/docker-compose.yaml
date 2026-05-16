@@ -87,6 +87,8 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/../dbt:/opt/airflow/dbt
     - ${AIRFLOW_PROJ_DIR:-.}/../gcp_keyfile.json:/opt/airflow/gcp_keyfile.json
     - ${AIRFLOW_PROJ_DIR:-.}/../dbt/profiles.yml:/home/airflow/.dbt/profiles.yml
+    - ${AIRFLOW_PROJ_DIR:-.}/../validate_weather.py:/opt/airflow/validate_weather.py
+    - ${AIRFLOW_PROJ_DIR:-.}/../gx:/opt/airflow/gx
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
